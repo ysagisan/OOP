@@ -6,6 +6,10 @@
 
 using namespace std;
 
+bool comp (pair<int, string> a, pair<int, string> b) {
+    return  a.first > b.first;
+}
+
 int main(int argc, char* argv[]) {
     string in_file, out_file;
 
@@ -43,23 +47,24 @@ int main(int argc, char* argv[]) {
             }
         }
     }
-
-    list <pair<string, int> > sortMap;
+    pair <int, string> p;
+    list <pair<int, string> > sortMap;
     for (auto item : word_frequency) {
-        sortMap.push_front(item);
+        p.first = item.second;
+        p.second = item.first;
+        sortMap.push_front(p);
     }
-    sortMap.sort();
+    sortMap.sort(comp);
 
     input_file.close();
-
 
     ofstream output_file;
     output_file.open(out_file);
     output_file << "Слово,Частота,Частота (%)" << endl;
 
     for (auto element : sortMap) {
-        double frequencyInPercentage = ((double)element.second / counterOfAllWord) * 100.0;
-        output_file << element.first << "," << element.second << "," << (int)frequencyInPercentage<< "%" << endl;
+        double frequencyInPercentage = ((double)element.first / counterOfAllWord) * 100.0;
+        output_file << element.second << "," << element.first << "," << (int)frequencyInPercentage<< "%" << endl;
     }
 
     return 0;
