@@ -20,9 +20,11 @@ int main(int argc, char* argv[]) {
     }
     else if (argc == 2) {
         cout << "Введите файл для записи" << endl;
+        return 0;
     }
     else if (argc == 1) {
         cout << "Введите файлы для чтения и записи" << endl;
+        return 0;
     }
 
 
